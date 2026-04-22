@@ -19,6 +19,24 @@
       display: flex; flex-direction: column;
     }
 
+    /* ── GRAIN TEXTURE ── */
+    body::after {
+      content: '';
+      position: fixed; inset: 0; z-index: 999;
+      pointer-events: none;
+      opacity: 0.045;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)'/%3E%3C/svg%3E");
+      background-size: 220px 220px;
+      mix-blend-mode: overlay;
+      animation: grainShift 0.12s steps(1) infinite;
+    }
+    @keyframes grainShift {
+      0%  { background-position:   0px   0px; }
+      25% { background-position: -60px -40px; }
+      50% { background-position:  40px  20px; }
+      75% { background-position: -20px  60px; }
+    }
+
     /* ── HEADER ── */
     header {
       flex-shrink: 0; z-index: 10;
@@ -84,16 +102,41 @@
       .intro-divider { margin: 44px auto; }
     }
     .intro-scroll {
-      position: absolute; bottom: max(28px, env(safe-area-inset-bottom));
-      display: flex; flex-direction: column; align-items: center; gap: 7px;
-      animation: nudge 2.2s ease-in-out infinite;
+      position: absolute; bottom: max(32px, env(safe-area-inset-bottom));
+      display: flex; flex-direction: column; align-items: center; gap: 12px;
     }
-    .intro-scroll span {
-      font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
-      font-weight: 300; color: rgba(255,255,255,0.28);
+    .intro-scroll-cta {
+      font-size: 9px; letter-spacing: 4px; text-transform: uppercase;
+      font-weight: 300; color: rgba(255,255,255,0.45);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 10px 20px; border-radius: 40px;
+      animation: ctaPulse 2.8s ease-in-out infinite;
     }
-    .scroll-line { width: 1px; height: 24px; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.28)); }
-    @keyframes nudge { 0%,100%{transform:translateY(0)} 55%{transform:translateY(6px)} }
+    .scroll-chevrons {
+      display: flex; flex-direction: column; align-items: center; gap: 3px;
+      animation: chevronDrop 1.6s ease-in-out infinite;
+    }
+    .scroll-chevrons span {
+      display: block; width: 10px; height: 10px;
+      border-right: 1px solid rgba(255,255,255,0.25);
+      border-bottom: 1px solid rgba(255,255,255,0.25);
+      transform: rotate(45deg);
+      animation: chevronFade 1.6s ease-in-out infinite;
+    }
+    .scroll-chevrons span:nth-child(2) { animation-delay: 0.2s; opacity: 0.5; }
+    .scroll-chevrons span:nth-child(3) { animation-delay: 0.4s; opacity: 0.25; }
+    @keyframes ctaPulse {
+      0%,100% { border-color: rgba(255,255,255,0.12); color: rgba(255,255,255,0.45); }
+      50%     { border-color: rgba(255,255,255,0.28); color: rgba(255,255,255,0.7);  }
+    }
+    @keyframes chevronDrop {
+      0%,100% { transform: translateY(0); }
+      55%     { transform: translateY(5px); }
+    }
+    @keyframes chevronFade {
+      0%,100% { opacity: 1; }
+      50%     { opacity: 0.3; }
+    }
 
     /* ── VIDEO SLIDE ── */
     .slide-reel { flex-direction: column; gap: 0; }
@@ -120,6 +163,73 @@
         flex: none;
       }
       .reel-wrap video { width: 100%; height: 100%; }
+    }
+
+    /* ── FOND DESKTOP : textes décoratifs ── */
+    .bg-left, .bg-right {
+      display: none;
+    }
+    @media (min-width: 600px) {
+      .bg-left, .bg-right {
+        display: flex;
+        position: absolute; top: 0; bottom: 0;
+        width: calc((100% - (100vh * 9/16)) / 2);
+        flex-direction: column;
+        justify-content: center;
+        padding: 0 32px;
+        pointer-events: none;
+        user-select: none;
+      }
+      .bg-left  { left: 0;  align-items: flex-start; }
+      .bg-right { right: 0; align-items: flex-end; text-align: right; }
+
+      /* Grand mot en filigrane */
+      .bg-word {
+        font-size: clamp(40px, 5vw, 72px);
+        font-weight: 200;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.04);
+        line-height: 1;
+        white-space: nowrap;
+      }
+
+      /* Ligne verticale + étiquette */
+      .bg-label {
+        display: flex; align-items: center; gap: 14px;
+        margin-top: 28px;
+      }
+      .bg-label-line {
+        width: 28px; height: 1px;
+        background: rgba(255,255,255,0.1);
+        flex-shrink: 0;
+      }
+      .bg-right .bg-label { flex-direction: row-reverse; }
+      .bg-label span {
+        font-size: 9px; font-weight: 300;
+        letter-spacing: 3px; text-transform: uppercase;
+        color: rgba(255,255,255,0.18);
+      }
+
+      /* Colonne de mots verticaux */
+      .bg-steps {
+        margin-top: 40px;
+        display: flex; flex-direction: column; gap: 10px;
+      }
+      .bg-steps p {
+        font-size: 8px; font-weight: 300;
+        letter-spacing: 3px; text-transform: uppercase;
+        color: rgba(255,255,255,0.1);
+      }
+
+      /* Année */
+      .bg-year {
+        font-size: clamp(52px, 6vw, 90px);
+        font-weight: 200;
+        color: rgba(255,255,255,0.03);
+        letter-spacing: 0.1em;
+        margin-top: auto;
+      }
     }
 
     /* ── TITRE OVERLAY (centré sur la vidéo) ── */
@@ -225,8 +335,12 @@
       <div class="intro-client">M6 Group — Contenus Verticaux</div>
       <p class="intro-desc">De 2024 à 2026, j'ai piloté la création de contenus courts pour les réseaux sociaux du Groupe M6. Mon approche&nbsp;? Une gestion à 360°&nbsp;: j'ai pris en charge chaque projet, de l'écriture du script jusqu'à la post-production. Que ce soit pour des interviews, des contenus originaux, des coulisses (making-of) ou des after-movies, j'ai conçu des formats percutants pour mettre en avant les programmes et personnalités du groupe.</p>
       <div class="intro-scroll">
-        <span>Scroll</span>
-        <div class="scroll-line"></div>
+        <div class="intro-scroll-cta">Voir les projets</div>
+        <div class="scroll-chevrons">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       </div>
     </div>
 
