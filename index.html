@@ -213,23 +213,26 @@
 
   <script>
     const reels = [
-      { file:"THE POWER_NEHUDA_1.mp4",               poster:"THE POWER_NEHUDA.jpg",               title:"The Power — Nehuda",                tag:"W9" },
-      { file:"THE POWER_JULIEN_1.mp4",               poster:"THE POWER_JULIEN.jpg",               title:"The Power — Julien",                tag:"W9" },
-      { file:"THE POWER_BENOIT_1.mp4",               poster:"THE POWER_BENOIT.jpg",               title:"The Power — Benoît",                tag:"W9" },
-      { file:"ARENE THE POWER_1.mp4",                poster:"ARENE THE POWER.jpg",                title:"The Power — L'Arène",               tag:"W9" },
-      { file:"CONTRE CHAMP ROI SOLEIL_1.mp4",        poster:"CONTRE CHAMP ROI SOLEIL.jpg",        title:"Le Roi Soleil — Coulisses",         tag:"M6" },
-      { file:"MAKING OF ROI SOLEIL_1.mp4",           poster:"MAKING OF ROI SOLEIL.jpg",           title:"Le Roi Soleil — Making Of",         tag:"M6" },
-      { file:"SOIREE QVEMA_1.mp4",                   poster:"SOIREE QVEMA.jpg",                   title:"QVEMA — Soirée",                    tag:"M6" },
-      { file:"DIS MOI TON JOB_1.mp4",                poster:"DIS MOI TON JOB.jpg",                title:"Dis Moi Ton Job",                   tag:"M6" },
-      { file:"MICRO TROTTOIR TOUTES TATOUEES_1.mp4", poster:"MICRO TROTTOIR TOUTES TATOUEES.jpg", title:"Toutes Tatouées — Micro-Trottoir",  tag:"M6" },
-      { file:"LES TRAITRES DANS LA VILLE_1.mp4",     poster:"LES TRAITRES DANS LA VILLE.jpg",     title:"Les Traîtres dans la Ville",        tag:"M6" },
-      { file:"REVEAL CAST LES TRAITRES_1.mp4",       poster:"REVEAL CAST LES TRAITRES.jpg",       title:"Les Traîtres — Révélation du Cast", tag:"M6" },
-      { file:"PRIX DU QUATAR_1.mp4",                 poster:"PRIX DU QUATAR.jpg",                 title:"Prix du Qatar",                     tag:"M6" },
-      { file:"LA GRANDE SEMAIE_1.mp4",               poster:"LA GRANDE SEMAIE.jpg",               title:"La Grande Semaine",                 tag:"M6" },
+      // Vert (priorité 1)
+      { file:"ARENE THE POWER_1.mp4",                poster:"ARENE THE POWER.jpg",                title:"L'Arène — The Power",               tag:"W9" },
       { file:"LES FLAMMES 2025_1.mp4",               poster:"LES FLAMMES 2025.jpg",               title:"Les Flammes 2025",                  tag:"M6" },
+      { file:"PRIX DU QUATAR_1.mp4",                 poster:"PRIX DU QUATAR.jpg",                 title:"Prix du Qatar",                     tag:"M6" },
+      { file:"REVEAL CAST LES TRAITRES_1.mp4",       poster:"REVEAL CAST LES TRAITRES.jpg",       title:"Reveal Cast — Les Traîtres",        tag:"M6" },
+      // Jaune (priorité 2)
+      { file:"DIS MOI TON JOB_1.mp4",                poster:"DIS MOI TON JOB.jpg",                title:"Dis-moi ton job",                   tag:"M6" },
+      { file:"LA GRANDE SEMAIE_1.mp4",               poster:"LA GRANDE SEMAIE.jpg",               title:"La Grande Semaine",                 tag:"M6" },
       { file:"LES BODIN'S_1.mp4",                    poster:"LES BODIN'S.jpg",                    title:"Les Bodin's",                       tag:"M6" },
-      { file:"BRUNO ET VINCENT_1.mp4",               poster:"BRUNO ET VINCENT.jpg",               title:"Bruno et Vincent",                  tag:"M6" },
+      { file:"LES TRAITRES DANS LA VILLE_1.mp4",     poster:"LES TRAITRES DANS LA VILLE.jpg",     title:"Les Traîtres dans la Ville",        tag:"M6" },
+      { file:"MAKING OF ROI SOLEIL_1.mp4",           poster:"MAKING OF ROI SOLEIL.jpg",           title:"Making Of — Roi Soleil",            tag:"M6" },
+      { file:"MICRO TROTTOIR TOUTES TATOUEES_1.mp4", poster:"MICRO TROTTOIR TOUTES TATOUEES.jpg", title:"Micro-trottoir — Toutes Tatouées",  tag:"M6" },
       { file:"MMA ACADEMY_1.mp4",                    poster:"MMA ACADEMY.jpg",                    title:"MMA Academy",                       tag:"M6" },
+      { file:"THE POWER_BENOIT_1.mp4",               poster:"THE POWER_BENOIT.jpg",               title:"The Power — Benoît",                tag:"W9" },
+      { file:"THE POWER_JULIEN_1.mp4",               poster:"THE POWER_JULIEN.jpg",               title:"The Power — Julien",                tag:"W9" },
+      { file:"THE POWER_NEHUDA_1.mp4",               poster:"THE POWER_NEHUDA.jpg",               title:"The Power — Nehuda",                tag:"W9" },
+      // Rouge (priorité 3)
+      { file:"BRUNO ET VINCENT_1.mp4",               poster:"BRUNO ET VINCENT.jpg",               title:"Bruno et Vincent",                  tag:"M6" },
+      { file:"CONTRE CHAMP ROI SOLEIL_1.mp4",        poster:"CONTRE CHAMP ROI SOLEIL.jpg",        title:"Contre-champ — Roi Soleil",         tag:"M6" },
+      { file:"SOIREE QVEMA_1.mp4",                   poster:"SOIREE QVEMA.jpg",                   title:"Soirée QVEMA",                      tag:"M6" },
     ];
 
     const feed    = document.getElementById('feed');
