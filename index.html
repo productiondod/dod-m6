@@ -19,11 +19,24 @@
       display: flex; flex-direction: column;
     }
 
-    /* ── TEXTURE FOND (visible sur desktop derrière la vidéo) ── */
+    /* ── TEXTURE FOND ── */
     .feed { background-color: var(--black); }
-    #bg-deco {
-      position: fixed; inset: 0; z-index: 0;
-      pointer-events: none;
+
+    /* Sur mobile le SVG est caché (vidéo plein écran) */
+    #bg-deco { display: none; }
+
+    @media (min-width: 600px) {
+      #bg-deco {
+        display: block;
+        position: fixed; inset: 0;
+        pointer-events: none;
+        z-index: 1; /* au-dessus du fond, sous la vidéo */
+      }
+      /* La vidéo passe au-dessus du SVG */
+      .reel-wrap { position: relative; z-index: 2; }
+      /* Le titre reste au-dessus */
+      .reel-overlay { z-index: 3; }
+      .sound-btn    { z-index: 4; }
     }
 
     /* ── HEADER ── */
@@ -312,35 +325,34 @@
   <!-- Décoration fond -->
   <svg id="bg-deco" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
     <!-- Grands cercles creux -->
-    <circle cx="120"  cy="200" r="180" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
-    <circle cx="120"  cy="200" r="90"  fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
-    <circle cx="1320" cy="700" r="220" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
-    <circle cx="1320" cy="700" r="110" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
-    <circle cx="1380" cy="120" r="80"  fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.8"/>
-    <circle cx="60"   cy="780" r="60"  fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.8"/>
-    <!-- Lignes fines diagonales -->
-    <line x1="0"    y1="0"   x2="400" y2="900" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
-    <line x1="1440" y1="0"   x2="1040" y2="900" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
-    <line x1="200"  y1="0"   x2="0"   y2="500" stroke="rgba(255,255,255,0.025)" stroke-width="0.5"/>
-    <line x1="1240" y1="0"   x2="1440" y2="500" stroke="rgba(255,255,255,0.025)" stroke-width="0.5"/>
-    <!-- Petits points -->
-    <circle cx="320"  cy="80"  r="1.5" fill="rgba(255,255,255,0.18)"/>
-    <circle cx="1100" cy="160" r="1.5" fill="rgba(255,255,255,0.18)"/>
-    <circle cx="80"   cy="520" r="1.5" fill="rgba(255,255,255,0.18)"/>
-    <circle cx="1360" cy="420" r="1.5" fill="rgba(255,255,255,0.18)"/>
-    <circle cx="240"  cy="820" r="1.5" fill="rgba(255,255,255,0.14)"/>
-    <circle cx="1200" cy="780" r="1.5" fill="rgba(255,255,255,0.14)"/>
-    <circle cx="700"  cy="40"  r="1"   fill="rgba(255,255,255,0.12)"/>
-    <circle cx="740"  cy="860" r="1"   fill="rgba(255,255,255,0.12)"/>
-    <!-- Croix fines -->
-    <line x1="298" y1="380" x2="318" y2="380" stroke="rgba(255,255,255,0.1)" stroke-width="0.6"/>
-    <line x1="308" y1="370" x2="308" y2="390" stroke="rgba(255,255,255,0.1)" stroke-width="0.6"/>
-    <line x1="1118" y1="540" x2="1138" y2="540" stroke="rgba(255,255,255,0.1)" stroke-width="0.6"/>
-    <line x1="1128" y1="530" x2="1128" y2="550" stroke="rgba(255,255,255,0.1)" stroke-width="0.6"/>
-    <!-- Arc haut gauche -->
-    <path d="M 0 350 Q 140 200 260 350" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="0.8"/>
-    <!-- Arc bas droite -->
-    <path d="M 1440 550 Q 1300 700 1180 550" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="0.8"/>
+    <circle cx="120"  cy="200" r="180" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
+    <circle cx="120"  cy="200" r="90"  fill="none" stroke="rgba(255,255,255,0.10)" stroke-width="0.6"/>
+    <circle cx="1320" cy="700" r="220" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
+    <circle cx="1320" cy="700" r="110" fill="none" stroke="rgba(255,255,255,0.10)" stroke-width="0.6"/>
+    <circle cx="1380" cy="120" r="80"  fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="0.8"/>
+    <circle cx="60"   cy="780" r="60"  fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="0.8"/>
+    <!-- Lignes diagonales -->
+    <line x1="0"    y1="0"   x2="400" y2="900" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+    <line x1="1440" y1="0"   x2="1040" y2="900" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+    <line x1="200"  y1="0"   x2="0"   y2="500" stroke="rgba(255,255,255,0.05)" stroke-width="0.6"/>
+    <line x1="1240" y1="0"   x2="1440" y2="500" stroke="rgba(255,255,255,0.05)" stroke-width="0.6"/>
+    <!-- Points -->
+    <circle cx="320"  cy="80"  r="2" fill="rgba(255,255,255,0.5)"/>
+    <circle cx="1100" cy="160" r="2" fill="rgba(255,255,255,0.5)"/>
+    <circle cx="80"   cy="520" r="2" fill="rgba(255,255,255,0.5)"/>
+    <circle cx="1360" cy="420" r="2" fill="rgba(255,255,255,0.5)"/>
+    <circle cx="240"  cy="820" r="2" fill="rgba(255,255,255,0.4)"/>
+    <circle cx="1200" cy="780" r="2" fill="rgba(255,255,255,0.4)"/>
+    <circle cx="700"  cy="40"  r="1.5" fill="rgba(255,255,255,0.35)"/>
+    <circle cx="740"  cy="860" r="1.5" fill="rgba(255,255,255,0.35)"/>
+    <!-- Croix -->
+    <line x1="295" y1="380" x2="321" y2="380" stroke="rgba(255,255,255,0.3)" stroke-width="0.8"/>
+    <line x1="308" y1="367" x2="308" y2="393" stroke="rgba(255,255,255,0.3)" stroke-width="0.8"/>
+    <line x1="1115" y1="540" x2="1141" y2="540" stroke="rgba(255,255,255,0.3)" stroke-width="0.8"/>
+    <line x1="1128" y1="527" x2="1128" y2="553" stroke="rgba(255,255,255,0.3)" stroke-width="0.8"/>
+    <!-- Arcs -->
+    <path d="M 0 350 Q 140 200 260 350"   fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+    <path d="M 1440 550 Q 1300 700 1180 550" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
   </svg>
 
   <header>
