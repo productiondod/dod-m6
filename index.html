@@ -19,29 +19,31 @@
       display: flex; flex-direction: column;
     }
 
-    /* ── GRAIN TEXTURE ── */
-    #grain {
-      position: fixed; inset: 0; z-index: 9999;
-      pointer-events: none; opacity: 0.09;
+    /* ── TEXTURE FOND (visible sur desktop derrière la vidéo) ── */
+    .feed {
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,0.055) 1px, transparent 1px);
+      background-size: 28px 28px;
+      background-color: var(--black);
     }
 
     /* ── HEADER ── */
     header {
       flex-shrink: 0; z-index: 10;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 18px 28px;
-      padding-top: max(18px, env(safe-area-inset-top));
+      padding: 22px 32px;
+      padding-top: max(22px, env(safe-area-inset-top));
       background: var(--black);
       border-bottom: 1px solid rgba(255,255,255,0.07);
     }
-    .header-logo { height: 32px; width: auto; display: block; }
-    .header-right { display: flex; align-items: center; gap: 20px; }
+    .header-logo { height: 44px; width: auto; display: block; }
+    .header-right { display: flex; align-items: center; gap: 24px; }
     .header-client {
-      font-size: 11px; font-weight: 300; letter-spacing: 3px;
-      text-transform: uppercase; color: rgba(255,255,255,0.35);
+      font-size: 12px; font-weight: 300; letter-spacing: 3px;
+      text-transform: uppercase; color: rgba(255,255,255,0.4);
     }
     .header-counter {
-      font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.5);
+      font-size: 14px; font-weight: 300; color: rgba(255,255,255,0.55);
       letter-spacing: 1px;
     }
     @media (max-width: 480px) { .header-client { display: none; } }
@@ -146,7 +148,7 @@
     }
 
     @media (min-width: 600px) {
-      .slide-reel { background: #030303; }
+      .slide-reel { background: transparent; }
       .reel-wrap {
         height: 100%; width: auto;
         aspect-ratio: 9 / 16;
@@ -307,8 +309,6 @@
   </style>
 </head>
 <body>
-
-  <canvas id="grain"></canvas>
 
   <header>
     <img src="LOGO-WHITE.svg" alt="dod production" class="header-logo">
@@ -540,30 +540,6 @@
     window.addEventListener('resize', setSlideHeights);
     preloadSlide(0);
 
-    // ── GRAIN CANVAS ──
-    (function() {
-      const canvas = document.getElementById('grain');
-      const ctx    = canvas.getContext('2d');
-      let w, h;
-      function resize() {
-        w = canvas.width  = window.innerWidth;
-        h = canvas.height = window.innerHeight;
-      }
-      resize();
-      window.addEventListener('resize', resize);
-      function tick() {
-        const img = ctx.createImageData(w, h);
-        const d   = img.data;
-        for (let i = 0; i < d.length; i += 4) {
-          const v = Math.random() * 255 | 0;
-          d[i] = d[i+1] = d[i+2] = v;
-          d[i+3] = 255;
-        }
-        ctx.putImageData(img, 0, 0);
-        requestAnimationFrame(tick);
-      }
-      tick();
-    })();
   </script>
 </body>
 </html>
